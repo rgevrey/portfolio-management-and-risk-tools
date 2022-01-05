@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-# Last updated 5/01/2022 19:28
+# Last updated 5/01/2022 19:35
 
 
 def url_scrap(url, path):
