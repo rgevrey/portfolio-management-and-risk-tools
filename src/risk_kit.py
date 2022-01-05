@@ -4,6 +4,8 @@ from scipy.stats import norm
 import pdb as pdb
 import os
 
+# Last updated on 5/01/2022 19:08
+
 #######
 # Data Extraction
 #######
