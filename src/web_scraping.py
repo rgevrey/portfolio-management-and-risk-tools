@@ -2,11 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 # Last updated 5/01/2022 19:35
 
 
-def url_scrap(url, path):
+def url_scrap(url, path, silent = True):
     """
     Saves the full content of a web page on the drive, bypassing disclaimer pages.
     Works only with Chrome and the following websites re disclaimers:
@@ -14,11 +15,18 @@ def url_scrap(url, path):
     Args:
         url : url to be scraped
         path : where to save the file on the drive
+        silent : True hides the browser window during execution
     """
     
+    if silent == True:
+        options = Options()
+        options.add_argument("--headless")
+        driver = webdriver.Chrome(options=options) # TO DO - ADD A SELECTOR TO RECOGNISE THE BROWSER IN USE
+    else:
+        driver = webdriver.Chrome()
+        
     # Bypassing disclaimers on the page to get to the real content
     if url.find("lgim.com") > 0:
-        driver = webdriver.Chrome() # TO DO - ADD A SELECTOR TO RECOGNISE THE BROWSER IN USE
         driver.get(url)
     
         # ADD ASSERTIONS FOR WHEN MORE FLEXIBLE
@@ -35,7 +43,6 @@ def url_scrap(url, path):
     
     # Getting the source code
     WebDriverWait(driver,10).until(EC.staleness_of(terms_accept))
-    print("wait complete") # DEBUG
     html = driver.page_source 
     driver.close() 
     
